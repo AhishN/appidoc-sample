@@ -1,0 +1,24 @@
+runtime: php55
+threadsafe: yes
+api_version: 1
+inbound_services:
+# [START mail_service]
+- mail
+# [END mail_service]
+  login: admin
+handlers:
+# [START incoming_handler]
+- url: /_ah/mail/.+
+  script: PhpMimeParser_class.php
+  login: admin
+# [END incoming_handler]
+
+- url: .*
+  script: helloworld.php
+
+env_variables:
+  # Replace USER, PASSWORD, DATABASE, and CONNECTION_NAME with the
+  # values obtained when configuring your Cloud SQL instance.
+  MYSQL_DSN: mysql:unix_socket=/cloudsql/turnkey-citadel-195504:asia-south1:second-gen-test;dbname=emial
+  MYSQL_USER: root
+  MYSQL_PASSWORD: appidoc

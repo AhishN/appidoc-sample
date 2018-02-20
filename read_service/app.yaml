@@ -1,0 +1,15 @@
+runtime: php55
+api_version: 1
+threadsafe: true
+# used by gloud tools
+service: micro
+handlers:
+- url: /.*
+  script: main.php
+
+env_variables:
+  # Replace USER, PASSWORD, DATABASE, and CONNECTION_NAME with the
+  # values obtained when configuring your Cloud SQL instance.
+  MYSQL_DSN: mysql:unix_socket=/cloudsql/turnkey-citadel-195504:asia-south1:second-gen-test;dbname=emial
+  MYSQL_USER: root
+  MYSQL_PASSWORD: appidoc
